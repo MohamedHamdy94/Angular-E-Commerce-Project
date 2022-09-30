@@ -1,0 +1,80 @@
+<header>
+<nav class="navbar navbar-expand-lg bg-primary sticky-top">
+    <div class="container-fluid">
+      <div class="navbar-brand d-flex">
+        <fa-icon routerLink="" class="ms-5 fs-3 text-white" [icon]="faStore">
+        </fa-icon>
+        <strong routerLink="" class="fs-3 text-white mx-3"> shoping</strong>
+        <input type="text" class="form-control" [(ngModel)]="searchTerm" (keyup)="search($event)" placeholder="search products">
+
+        <fa-icon class="ms-5 mt-2 fs-4 text-primary faMagnifyingGlass"
+          [icon]="faMagnifyingGlass"
+        >
+        </fa-icon>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link fs-4 text-white" aria-current="page" routerLinkActive="active" routerLink="/Auth/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white fs-4" routerLink="/Auth/register" routerLinkActive="active">Register</a>
+          </li>
+
+        </ul>
+        <div class="me-5 w-1 cart">
+          <fa-icon
+            routerLink="cart"
+            class="me-5 fs-3 text-white"
+            [icon]="faCartShopping"
+          >
+          </fa-icon>
+          <span class="badge  badge-pill bg-danger">
+            {{ totalItem }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<!--
+<header>
+  <nav class="navbar bg-primary shadow-sm">
+    <div class="navbar-brand d-flex">
+      <fa-icon routerLink="" class="ms-5 fs-3 text-white" [icon]="faStore">
+      </fa-icon>
+      <strong routerLink="" class="fs-3 text-white mx-3"> shoping</strong>
+      <input type="text" class="form-control" [(ngModel)]="searchTerm" (keyup)="search($event)" placeholder="search products">
+
+      <fa-icon
+        class="ms-5 mt-2 fs-4 text-primary faMagnifyingGlass"
+        [icon]="faMagnifyingGlass"
+      >
+      </fa-icon>
+    </div>
+    <div class="me-5 w-1 cart">
+      <fa-icon
+        routerLink="cart"
+        class="me-5 fs-3 text-white"
+        [icon]="faCartShopping"
+      >
+      </fa-icon>
+      <span class="badge  badge-pill bg-danger">
+        {{ totalItem }}
+      </span>
+    </div>
+    <a class="nav-link fs-4" aria-current="page" routerLinkActive="active" routerLink="/Auth/login">Login</a>
+    <a class="nav-link fs-4" routerLink="/Auth/register" routerLinkActive="active">Register</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+        </li>
+        <li class="nav-item">
+        </li>
+      </ul>
+    </div>
+
+
+</nav>
+
+</header> -->
