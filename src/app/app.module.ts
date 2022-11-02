@@ -18,6 +18,7 @@ import { CartComponent } from './cart/cart.component';
 import { RequestInterceptor } from './request.interceptor';
 import { LoaderComponent } from './loader/loader.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CartChildComponent } from './cart-child/cart-child.component';
 
 @NgModule({
   declarations: [
@@ -29,8 +30,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     NotFounPageComponent,
     ProductDetailsComponent,
     CartComponent,
-    LoaderComponent],
+    LoaderComponent,
+    CartChildComponent],
   imports: [
+    FontAwesomeModule,
+
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -38,8 +42,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatCardModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    HttpClientModule,
-    FontAwesomeModule
+    HttpClientModule
   ],
   providers: [
     {

@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { IProduct } from 'src/app/interfaces/iproduct';
 import { CounterService } from 'src/app/services/counter.service';
-
+''
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
@@ -9,19 +10,24 @@ import { CounterService } from 'src/app/services/counter.service';
 })
 export class ProductCardComponent implements OnInit {
   @Input() product: any;
-  constructor(private router: Router, private counterService: CounterService) {
+  constructor(private router: Router, private counterService: CounterService ) {
   }
-  counter = 0;
+  counter:number = 0;
+  cartProducts:any
   ngOnInit(): void {
-    this.counterService.getCart().subscribe(
-      (val:any) => { this.counter = val }
-    );
+    this.counterService.productList.subscribe(res=>{
+      this.cartProducts=res
+      this.counter = res.length;
+    });
   }
-  navigateToProductDetails() {
+  showDetails() {
     this.router.navigate(['', this.product.id])
   }
-  addToCart(product: any) {
-    this.counterService.addtoCart(product);
+  addToCart(product:IProduct) {
+
+console.log(product)
+this.counterService.addToCart(product)
   }
+
 
 }

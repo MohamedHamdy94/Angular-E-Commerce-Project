@@ -1,10 +1,102 @@
-<mat-card class="example-card">
+<!-- <mat-card class="example-card">
     <mat-card-title-group>
       <mat-card-title class="text-secondary text-center fw-bold">{{productDetails?.category}}</mat-card-title>
       <mat-card-subtitle class="text-primary text-center">{{productDetails?.title}}</mat-card-subtitle>
-      <img mat-card-lg-image src="{{productDetails?.image}}" >
+      <img mat-card-lg-image src="../../../assets/images/{{productDetails?.image}}" >
     </mat-card-title-group>
     <mat-card-content>
       {{productDetails?.description}}
     </mat-card-content>
-  </mat-card>
+  </mat-card> -->
+
+  
+<div class="container mt-5 h-100" id="product-section">
+  <div class="row">
+    <div class="col-md-6">
+      <img
+        src="../../../assets/images/{{product.image}}"
+        alt=""
+        class="image-responsive w-75"
+      />
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>{{ product.title }}</h1>
+          <h2>{{ product.category }}</h2>
+        </div>
+        <div class="col-md-12">
+          <p class="description">
+            {{ product.description }}
+          </p>
+        </div>
+        <div class="d-flex">
+          <fa-icon
+            *ngIf="product.rating.rate < 1"
+            class="  text-warning"
+            [icon]="faStarHalfStroke"
+          >
+          </fa-icon>
+          <fa-icon
+            *ngIf="product.rating.rate > 1"
+            class="  text-warning"
+            [icon]="faStar"
+          >
+          </fa-icon>
+          <fa-icon
+            *ngIf="product.rating.rate < 2 && product.rating.rate > 1"
+            class="  text-warning"
+            [icon]="faStarHalfStroke"
+          >
+          </fa-icon>
+          <fa-icon
+            *ngIf="product.rating.rate > 2"
+            class="  text-warning"
+            [icon]="faStar"
+          >
+          </fa-icon>
+          <fa-icon
+            *ngIf="product.rating.rate < 3 && product.rating.rate > 2"
+            class="  text-warning"
+            [icon]="faStarHalfStroke"
+          >
+          </fa-icon>
+          <fa-icon
+            *ngIf="product.rating.rate > 3"
+            class="  text-warning"
+            [icon]="faStar"
+          >
+          </fa-icon>
+          <fa-icon
+            *ngIf="product.rating.rate < 4 && product.rating.rate > 3"
+            class="  text-warning"
+            [icon]="faStarHalfStroke"
+          >
+          </fa-icon>
+          <fa-icon
+            *ngIf="product.rating.rate > 4"
+            class="  text-warning"
+            [icon]="faStar"
+          >
+          </fa-icon>
+          <fa-icon
+            *ngIf="product.rating.rate < 5 && product.rating.rate > 4"
+            class="  text-warning"
+            [icon]="faStarHalfStroke"
+          >
+          </fa-icon>
+        </div>
+        <div class="col-md-12 bottom-rule">
+          <h2 class="product-price">{{ product.price | currency }}</h2>
+        </div>
+        <div class="">
+          <button *ngIf="product" class="btn btn-primary" (click)="addToCart(product)">
+            Add to cart
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- end row -->
+  </div>
+  <!-- end container -->
+</div>

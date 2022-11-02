@@ -1,60 +1,191 @@
-<div class="container-fluid p-5">
-  <h2 *ngIf="total; then full; else empty"></h2>
-  <ng-template #full>
-    <table class="table table-dark table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Image</th>
-          <th scope="col">Name</th>
-          <th scope="col">Price</th>
-          <th scope="col">Quantity</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tr *ngFor="let product of products">
-        <td class="text-dark">
-          <img
-            [src]="product.image"
-            style="width: 150px; height: 150px"
-            class="img-fluid"
-            alt=""
-          />
-        </td>
-        <td class="text-dark">{{ product.title }}</td>
-        <td class="text-dark">{{ product.price | currency: "EGP" }}</td>
-        <td class="text-dark text-white">
-          <input
-            type="button"
-            class="text-white"
-            (click)="increase(quantity, product.id)"
-            value="+"
-          /><input
-            class="mx-4 text-white"
-            style="width: 40px"
-            type="text"
-            value="1"
-            #quantity
-            disabled
-          /><input
-            (click)="decrease(quantity, product.id)"
-            type="button"
-            value="-"
-            class="text-white"
-          />
-        </td>
-        <td class="text-dark">
-          <button
-            class="btn btn-dark text-white"
-            (click)="removeProducts(product)"
-          >
-            remove
-          </button>
-        </td>
-      </tr>
-    </table>
-    <h1 class="text-center">Total : {{ total | currency: "EGP" }}</h1>
-  </ng-template>
-  <ng-template #empty>
-    <h1 class="text-danger">Your Cart is Empty</h1>
-  </ng-template>
-</div>
+
+<section class="h-100" style="background-color: #eee">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col">
+        <div *ngIf="productList.length == 0">
+          <div class="col">
+            <div
+              class="d-flex flex-column justify-content-center align-items-center"
+            >
+              <img
+                src="../../../assets/images/—Pngtree—creative shopping festival shopping cart_4463819.png"
+                class="w-25"
+                alt=""
+              />
+              <h4>your cart is empty</h4>
+              <h6>Add product to it now</h6>
+              <button routerLink="" class="btn btn-primary">Shop Now</button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="productList.length != 0">
+          <div class="card">
+            <div class="card-body p-4">
+              <div class="row">
+                <div class="col-lg-7">
+                  <h5 class="mb-3">
+                    <a href="#!" class="text-body"
+                      ><i class="fas fa-long-arrow-alt-left me-2"></i>Continue
+                      shopping</a
+                    >
+                  </h5>
+                  <hr />
+
+                  <div
+                    class="d-flex justify-content-between align-items-center mb-4"
+                  >
+                    <div>
+                      <p class="mb-1">Shopping cart</p>
+                      <p class="mb-0">
+                        You have  items in your cart
+                      </p>
+                    </div>
+                  </div>
+                  <ng-container *ngFor="let product of productList">
+
+                      <app-cart-child [product]="product"></app-cart-child>
+                  </ng-container>
+                  <div class="mb-0">
+                    <button
+                      (click)="emptyCart()"
+                      type="button"
+                      class="btn btn-danger m-3"
+                    >
+                      Empte Cart
+                    </button>
+                    <button routerLink="" class="btn btn-primary">
+                      Shop Now
+                    </button>
+                  </div>
+                </div>
+                <div class="col-lg-5">
+                  <div class="card bg-primary text-white rounded-3">
+                    <div class="card-body">
+                      <div
+                        class="d-flex justify-content-between align-items-center mb-4"
+                      >
+                        <h5 class="mb-0">Card details</h5>
+                      </div>
+
+                      <p class="small mb-2">Card type</p>
+                      <a href="#!" type="submit" class="text-white"
+                        ><i class="fab fa-cc-mastercard fa-2x me-2"></i
+                      ></a>
+                      <a href="#!" type="submit" class="text-white"
+                        ><i class="fab fa-cc-visa fa-2x me-2"></i
+                      ></a>
+                      <a href="#!" type="submit" class="text-white"
+                        ><i class="fab fa-cc-amex fa-2x me-2"></i
+                      ></a>
+                      <a href="#!" type="submit" class="text-white"
+                        ><i class="fab fa-cc-paypal fa-2x"></i
+                      ></a>
+
+                      <form class="mt-4">
+                        <div class="form-outline form-white mb-4">
+                          <input
+                            type="text"
+                            id="typeName"
+                            class="form-control form-control-lg"
+                            siez="17"
+                            placeholder="Cardholder's Name"
+                          />
+                          <label class="form-label" for="typeName"
+                            >Cardholder's Name</label
+                          >
+                        </div>
+
+                        <div class="form-outline form-white mb-4">
+                          <input
+                            type="text"
+                            id="typeText"
+                            class="form-control form-control-lg"
+                            siez="17"
+                            placeholder="1234 5678 9012 3457"
+                            minlength="19"
+                            maxlength="19"
+                          />
+                          <label class="form-label" for="typeText"
+                            >Card Number</label
+                          >
+                        </div>
+
+                        <div class="row mb-4">
+                          <div class="col-md-6">
+                            <div class="form-outline form-white">
+                              <input
+                                type="text"
+                                id="typeExp"
+                                class="form-control form-control-lg"
+                                placeholder="MM/YYYY"
+                                size="7"
+                                id="exp"
+                                minlength="7"
+                                maxlength="7"
+                              />
+                              <label class="form-label" for="typeExp"
+                                >Expiration</label
+                              >
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-outline form-white">
+                              <input
+                                type="password"
+                                id="typeText"
+                                class="form-control form-control-lg"
+                                placeholder="&#9679;&#9679;&#9679;"
+                                size="1"
+                                minlength="3"
+                                maxlength="3"
+                              />
+                              <label class="form-label" for="typeText"
+                                >Cvv</label
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+
+                      <hr class="my-4" />
+
+                      <div class="d-flex justify-content-between">
+                        <p class="mb-2">Subtotal</p>
+                        <p class="mb-2">{{ total | currency }}</p>
+                      </div>
+
+                      <div class="d-flex justify-content-between">
+                        <p class="mb-2">Shipping</p>
+                        <p class="mb-2">{{Shipping|currency}}</p>
+                      </div>
+
+                      <div class="d-flex justify-content-between mb-4">
+                        <p class="mb-2">Total</p>
+                        <p class="mb-2">{{ allTotal | currency }}</p>
+                      </div>
+
+                      <button
+                        type="button"
+                        class="btn btn-info btn-block btn-lg"
+                        (click)="sendOrder()"
+                      >
+                        <div class="d-flex justify-content-between">
+                          <span
+                            >Checkout
+                            <i class="fas fa-long-arrow-alt-right ms-2"></i
+                          ></span>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

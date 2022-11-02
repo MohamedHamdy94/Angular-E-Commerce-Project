@@ -1,54 +1,56 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Product } from '../interfaces/product';
+import { IProduct } from '../interfaces/iproduct';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CounterService {
-  public cartItemList: any = [];
-  public search = new BehaviorSubject<string>('');
-
-  constructor() {}
-  getCart() {
-    return this.cartItemList;
-  }
-
-  setProduct(product: any) {
-    this.cartItemList.push(...product);
-  }
-  addtoCart(product: any) {
-    const isFound = this.cartItemList.find((item:any) => item.id === product.id);
-    if (!isFound) {
-      this.cartItemList.push(product);
-      this.getTotalPrice();
-      console.log(this.cartItemList);
+  private products: IProduct[] = [];
+  public productList = new BehaviorSubject<any>([]);
+  addToCart(product: IProduct) {
+    const existItem = this.products.find((x) => x.id === product.id);
+    console.log(existItem)
+    if (existItem) {
+      existItem.quantity = existItem.quantity + 1;
+      existItem.totalPrice = existItem.price * existItem.quantity;
+      this.products.map((x: any) => (x.id === existItem ? product : x));
+      this.productList.next(this.products);
+    } else {
+     
+      product.quantity=product.quantity+1
+      product.totalPrice=product.price*product.quantity
+      this.products.push(product);
+      this.productList.next(this.products);
     }
   }
-  getTotalPrice(): number {
-    let grandTotal = 0;
-    this.cartItemList.map((a: any) => {
-      grandTotal += a.total;
-    });
-    return grandTotal;
+
+  clearSpeciProduct(product: IProduct) {
+    const existItem = this.products.find((x) => x.id === product.id);
+
+    if (existItem) {
+      existItem.quantity = existItem.quantity - 1;
+      existItem.totalPrice = existItem.price * existItem.quantity;
+      this.products.map((x: any) => (x.id === existItem ? product : x));
+      this.productList.next(this.products);
+    } 
   }
-  removeCartItem(product: any) {
-    // this.cartItemList.map((a: any, index: any) => {
-    //   if (product.id === a.id) {
-    //     this.cartItemList.splice(index, 1);
-    //   }
-    // } );
-    const isFound = this.cartItemList.find(
-      (item: Product) => item.id === product.id
-    );
-    if (isFound.quantity) {
-      this.cartItemList.fillter((item: Product) => {
-        item.id != product.id;
-      });
-    }
+  
+  deleteProduct(product: IProduct) {
+    console.log(this.products);
+
+    this.products = this.products.filter((item) => item.id !== product.id);
+    console.log(this.products);
+
+    this.productList.next(this.products);
   }
-  removeAllCart() {
-    this.cartItemList = [];
-    // this.cartList.next(this.cartItemList);
+  getProducts() {
+    return this.products;
+  }
+
+
+  removeCart() {
+    this.products = [];
+    this.productList.next(this.products);
   }
 }

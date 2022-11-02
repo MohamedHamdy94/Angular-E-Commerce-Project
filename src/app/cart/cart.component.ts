@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CounterService } from '../services/counter.service';
-import { Product } from '../interfaces/product';
+import { IProduct } from '../interfaces/iproduct';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -8,41 +9,43 @@ import { Product } from '../interfaces/product';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-  products: any = [];
-  totalPrice !: number ;
-  public total !: number;
-  totalItem=0
-  constructor( private cartService : CounterService) {}
+  inputValue!:number
+  productList: any = [];
+  total: number = 0;
+  Shipping: number = 0;
+  allTotal:number=0
+  constructor(private counterService: CounterService ,private router :Router) {}
   ngOnInit(): void {
-
-this.cartService.getCart()
-.subscribe((res:any)=>{
-  this.products = res;
-  this.total = this.cartService.getTotalPrice();
-  this.totalPrice = this.cartService.getTotalPrice()+20;
-
-})
-
-    this.cartService.getCart()
-    .subscribe((res:any)=>{
-      this.totalItem = res.length;
-    })
-console.log(this.products.lenght)
+    this.productList = this.counterService.getProducts();
+    console.log(this.productList)
+      this.total = this.productList.reduce((a:any,b:any)=>a+b.totalPrice,0);
   }
 
-  removeProducts(product:any){
-    this.cartService.removeCartItem(product)
+  ngDoCheck(){
+    this.productList = this.counterService.getProducts();
+    this.total = this.productList.reduce((a:any,b:any)=>a+b.totalPrice,0);
+  this.Shipping=  this.total*0.02
+  this.allTotal=this.Shipping+this.total
   }
+  increase(product: IProduct) {
+this.counterService.addToCart(product)
+  }
+  decrease(product: IProduct) {
+this.counterService.clearSpeciProduct(product)
+  }
+
+  removeProduct(product: IProduct) {
+this.counterService.deleteProduct(product)
+
+  }
+
   emptyCart(){
-    this.cartService.removeAllCart()
-  }
+this.counterService.removeCart()
 
-  increase(event: any, product:any){
-    console.log(event.target.value);
-    this.cartService.removeCartItem(product)
   }
-  decrease(event: any, product:any){
-    console.log(event.target.value);
-    this.cartService.addtoCart(product)
-  }
+  sendOrder(){
+    this.counterService.removeCart()
+alert("order saved")
+this.router.navigate(['']);
+}
 }
