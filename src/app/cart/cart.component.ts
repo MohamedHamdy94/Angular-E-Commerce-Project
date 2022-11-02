@@ -14,6 +14,8 @@ export class CartComponent implements OnInit {
   total: number = 0;
   Shipping: number = 0;
   allTotal:number=0
+  items:number=0
+
   constructor(private counterService: CounterService ,private router :Router) {}
   ngOnInit(): void {
     this.productList = this.counterService.getProducts();
@@ -26,6 +28,7 @@ export class CartComponent implements OnInit {
     this.total = this.productList.reduce((a:any,b:any)=>a+b.totalPrice,0);
   this.Shipping=  this.total*0.02
   this.allTotal=this.Shipping+this.total
+this.items= this.productList.length
   }
   increase(product: IProduct) {
 this.counterService.addToCart(product)

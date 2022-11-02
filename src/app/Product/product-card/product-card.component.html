@@ -1,6 +1,6 @@
 
 
-<mat-card  class="example-card m-2">
+<mat-card  class="example-card p-2 m-2">
     <mat-card-header>
       <img mat-card-image (click)="showDetails()" src="../../../assets/images/{{product.image}}" alt="Photo of a Shiba Inu">
     </mat-card-header>
@@ -9,10 +9,68 @@
       <!-- <mat-card-subtitle class="text-primary text-center">{{product.title}}</mat-card-subtitle> -->
       <h5 class="card-title" (click)="showDetails()">{{ product.title }}</h5>
       <p class="card-text"(click)="showDetails()">{{ product.description }}</p>
-      <p>{{product.price|currency:'EGP'}}</p>
+      <div class="d-flex justify-content-between px-2">
+        <h2>{{product.price | currency}}</h2>
+        <div class="d-flex">
+          <fa-icon
+            *ngIf="product.rating.rate < 1"
+            class="  text-warning"
+            [icon]="faStarHalfStroke"
+          >
+          </fa-icon>
+          <fa-icon
+            *ngIf="product.rating.rate > 1"
+            class="  text-warning"
+            [icon]="faStar"
+          >
+          </fa-icon>
+          <fa-icon
+            *ngIf="product.rating.rate < 2 && product.rating.rate > 1"
+            class="  text-warning"
+            [icon]="faStarHalfStroke"
+          >
+          </fa-icon>
+          <fa-icon
+            *ngIf="product.rating.rate > 2"
+            class="  text-warning"
+            [icon]="faStar"
+          >
+          </fa-icon>
+          <fa-icon
+            *ngIf="product.rating.rate < 3 && product.rating.rate > 2"
+            class="  text-warning"
+            [icon]="faStarHalfStroke"
+          >
+          </fa-icon>
+          <fa-icon
+            *ngIf="product.rating.rate > 3"
+            class="  text-warning"
+            [icon]="faStar"
+          >
+          </fa-icon>
+          <fa-icon
+            *ngIf="product.rating.rate < 4 && product.rating.rate > 3"
+            class="  text-warning"
+            [icon]="faStarHalfStroke"
+          >
+          </fa-icon>
+          <fa-icon
+            *ngIf="product.rating.rate > 4"
+            class="  text-warning"
+            [icon]="faStar"
+          >
+          </fa-icon>
+          <fa-icon
+            *ngIf="product.rating.rate < 5 && product.rating.rate > 4"
+            class="  text-warning"
+            [icon]="faStarHalfStroke"
+          >
+          </fa-icon>
+        </div>
+      </div>
 
-    </mat-card-content>
-    <mat-card-actions>
       <button mat-raised-button (click)="addToCart(product)" color="primary">Add to cart</button>
-    </mat-card-actions>
+    </mat-card-content>
+    <!-- <mat-card-actions>
+    </mat-card-actions> -->
   </mat-card>

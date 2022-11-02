@@ -1,56 +1,70 @@
-<div class="card mb-3">
-  <div class="card-body">
-    <div
-      class="row d-flex justify-content-between align-items-center"
-    >
-      <div class="col-md-2 col-lg-2 col-xl-2">
-        <img
-          src="../../assets/images/{{product.image}}"
-          class="img-fluid rounded-3"
-          alt="Cotton T-shirt"
-        />
-      </div>
-      <div class="col-md-3 col-lg-3 col-xl-3">
-        <h6 class="mb-2">{{ product.title }}</h6>
-      </div>
-      <div class="col-md-4 col-lg-4 col-xl-3 d-flex">
-       <button
-          class="btn btn-link px-2"
-          click="this.parentNode.querySelector('input[type=number]').stepDown() ; "
-          (click)="decrease(product)"
-       [disabled]="product.quantity==1"
-       
-          >
-          
-          <i class="fas fa-minus"></i>
-        </button>
 
-        <input
-          id="form1"
-          min="0"
-          name="quantity"
-          value="{{ product.quantity }}"
-          type="number"
-          class="form-control form-control-sm"
-        />
 
-        <button
-          class="btn btn-link px-2"
-          click="this.parentNode.querySelector('input[type=number]').stepUp();increase(product)"
-          (click)="increase(product)"  >
-          <i class="fas fa-plus"></i>
-        </button>
-      </div>
-      <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-        <h5 class="mb-0">{{ product.totalPrice | currency }}</h5>
-      </div>
-      <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-        <a
-          (click)="removeProduct(product)"
-          class="text-danger"
-          ><i class="fas fa-trash fa-lg"></i
-        ></a>
-      </div>
-    </div>
-  </div>
+
+<div class="cart_items">
+    <ul class="cart_list">
+        <li class="cart_item clearfix">
+            <div class="cart_item_image"><img           src="../../assets/images/{{product.image}}"              alt=""></div>
+            <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
+                <div class="cart_item_name cart_info_col">
+                    <div class="cart_item_title">{{ product.title }}</div>
+                    <div class="cart_item_text">{{ product.description }}</div>
+                </div>
+               
+                <div class="cart_item_quantity cart_info_col">
+                    <div class="cart_item_title">Quantity</div>
+                    <div class="cart_item_text">
+                      <div class="col-md-4 col-lg-4 col-xl-3 d-flex">
+                        <button
+                           class="btn btn-link px-2"
+                           click="this.parentNode.querySelector('input[type=number]').stepDown() ; "
+                           (click)="decrease(product)"
+                        [disabled]="product.quantity==1"
+                        
+                           >
+                           
+                           <i class="fas fa-minus"></i>
+                         </button>
+                 
+                         <input
+                           id="form1"
+                           min="0"
+                           name="quantity"
+                           value=" {{ product.quantity }}"
+                           type="numbe"
+                           class="form-control form-control-sm "
+                         />
+                 
+                         <button
+                           class="btn btn-link px-2"
+                           click="this.parentNode.querySelector('input[type=number]').stepUp();increase(product)"
+                           (click)="increase(product)"  >
+                           <i class="fas fa-plus"></i>
+                         </button>
+                       </div>
+ 
+                    </div>
+                </div>
+                <div class="cart_item_price cart_info_col mx-2">
+                    <div class="cart_item_title">Price</div>
+                    <div class="cart_item_text">{{product.price | currency }}</div>
+                </div>
+                <div class="cart_item_total cart_info_col">
+                    <div class="cart_item_title">Total</div>
+                    <div class="cart_item_text">{{ product.totalPrice | currency }}</div>
+                </div>
+                <div class="cart_item_price ">
+                  <div  class="cart_item_title"></div>
+                  <div class="cart_item_text">
+
+                    <a
+                      (click)="removeProduct(product)"
+                      class="text-danger cart_item_title"
+                      ><h1><i class="fas fa-trash "></i
+                        ></h1></a>
+                  </div>
+                </div>
+            </div>
+        </li>
+    </ul>
 </div>
