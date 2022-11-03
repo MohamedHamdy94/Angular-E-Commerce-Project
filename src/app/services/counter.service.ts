@@ -8,6 +8,8 @@ import { IProduct } from '../interfaces/iproduct';
 export class CounterService {
   private products: IProduct[] = [];
   public productList = new BehaviorSubject<any>([]);
+  public search = new BehaviorSubject<string>('');
+
   addToCart(product: IProduct) {
     const existItem = this.products.find((x) => x.id === product.id);
     console.log(existItem)

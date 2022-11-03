@@ -19,6 +19,8 @@ import { RequestInterceptor } from './request.interceptor';
 import { LoaderComponent } from './loader/loader.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CartChildComponent } from './cart-child/cart-child.component';
+import { SharedPipe } from './shared.pipe';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { CartChildComponent } from './cart-child/cart-child.component';
     ProductDetailsComponent,
     CartComponent,
     LoaderComponent,
-    CartChildComponent],
+    CartChildComponent,
+    SharedPipe,
+    FooterComponent],
   imports: [
     FontAwesomeModule,
 

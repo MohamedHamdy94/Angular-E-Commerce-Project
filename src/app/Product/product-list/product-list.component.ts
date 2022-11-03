@@ -10,9 +10,12 @@ import { CounterService } from 'src/app/services/counter.service';
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit {
+  searchKey: string = '';
 
   products:any;
-  constructor(private productService:ProductService) { }
+  category: any;
+
+  constructor(private productService:ProductService,private CounterService : CounterService) { }
 
   ngOnInit(): void {
     // this.productService.getProductsList().subscribe(
@@ -20,7 +23,26 @@ export class ProductListComponent implements OnInit {
     //     this.products=data;
     //   }
     // )
-    this.products=productList;
+    // this.products= this.productService.getProducts()
+    this.productService.getProducts().subscribe((res:any) => {
+      this.products = res;
+      this.category = res;
+      this.products.forEach((a: any) => {
+        if (
+          a.category === "women's clothing" ||
+          a.category === "men's clothing"
+        ) {
+          a.category = 'fashion';
+        }
+        // Object.assign(a, { quantity: 1});
+      });
+      console.log(this.products);
+    });
+
+    this.CounterService.search.subscribe((val: any) => {
+      this.searchKey = val;
+    });
   }
+  
 
 }

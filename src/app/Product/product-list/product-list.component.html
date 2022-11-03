@@ -1,6 +1,6 @@
 <div id="products" class="container-fluid "style="background-color: #eee">
   <div class=" row">
-    <div class="col-xl-3 col-lg-4  col-md-6 col-sm-8 col-xs-12 mt-5 "  *ngFor="let product of products">
+    <div class="col-xl-3 col-lg-4  col-md-6 col-sm-8 col-xs-12 mt-5 "  *ngFor="let product of products| shared: searchKey:'title'">
         <app-product-card class="" [product]="product"></app-product-card>
     </div>
   </div>
